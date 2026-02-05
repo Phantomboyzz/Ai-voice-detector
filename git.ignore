@@ -1,0 +1,41 @@
+# Virtual environment
+venv/
+.env
+.env.*
+
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.log
+
+# System files
+.DS_Store
+Thumbs.db
+
+# IDE / Editor files
+.vscode/
+.idea/
+
+# Audio files and temp data
+*.mp3
+*.wav
+temp_input.mp3
+base64_output.txt
+
+# Test artifacts
+tests/__pycache__/
+tests/*.log
+
+# OS generated files
+*.swp
+*.swo
+
+# Build files
+build/
+dist/
+*.egg-info/
+
+# Docker
+docker-compose.yml
