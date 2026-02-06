@@ -367,9 +367,9 @@ Contributions are welcome! Please follow these steps:
 
 Having issues? Need help?
 
-- 📧 Email: support@example.com
-- 🐛 [Report a Bug](https://github.com/yourusername/ai-voice-detector/issues)
-- 💬 [Discussions](https://github.com/yourusername/ai-voice-detector/discussions)
+- 📧 Email: aryanjha326@gmail.com
+- 🐛 [Report a Bug](https://github.com/Phantomboyzz/ai-voice-detector/issues)
+- 💬 [Discussions](https://github.com/Phantomboyzz/ai-voice-detector/discussions)
 
 ---
 
@@ -377,7 +377,7 @@ Having issues? Need help?
 
 **Built for India AI Impact Buildathon**
 
-Made with ❤️ by [Your Name](https://github.com/yourusername)
+Made with ❤️ by [Aryan Jha](https://github.com/Phantomboyzz)
 
 ---
 

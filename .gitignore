@@ -1,0 +1,50 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.venv/
+
+# Environment variables
+.env
+.env.*
+config.env
+
+# Logs
+*.log
+logs/
+log/
+
+# IDE / Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Audio temporary files
+temp_input.mp3
+temp_input.wav
+
+# Test artifacts
+.coverage
+htmlcov/
+
+# Byte-compiled
+*.pyo
+*.pyd
+
+# Python package files
+*.egg-info/
+dist/
+build/
+
+# Pytest cache
+.pytest_cache/
