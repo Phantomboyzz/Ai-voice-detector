@@ -18,37 +18,61 @@ async def voice_detection(
     x_api_key: str = Depends(verify_api_key)
 ):
     try:
-        # Validate language
         validate_language(request.language)
 
-        # Validate format
         if request.audioFormat.lower() != "mp3":
             raise HTTPException(
                 status_code=400,
                 detail="Only mp3 format supported"
             )
 
-        # Decode Base64 to MP3 file
         mp3_path = "temp_input.mp3"
-        decode_base64_to_file(request.audioBase64, mp3_path)
+        wav_path = "temp_input.wav"
 
-        # Convert to WAV for processing
-        wav_path = convert_to_wav(mp3_path)
+        try:
+            decode_base64_to_file(request.audioBase64, mp3_path)
+        except Exception:
+            raise HTTPException(
+                status_code=400,
+                detail="Invalid base64 audio data"
+            )
 
-        # Extract audio features
-        features = extract_audio_features(wav_path)
+        try:
+            wav_path = convert_to_wav(mp3_path)
+        except Exception:
+            raise HTTPException(
+                status_code=400,
+                detail="Failed to process audio file – may be corrupted or unsupported"
+            )
 
-        # Transcribe audio using Groq
-        transcript = transcribe_audio(mp3_path)
+        try:
+            features = extract_audio_features(wav_path)
+        except Exception:
+            raise HTTPException(
+                status_code=400,
+                detail="Could not extract features from audio – file may be too short or silent"
+            )
 
-        # Classify using LLM
-        llm_result = classify_with_llm(
-            transcript,
-            features,
-            request.language
-        )
+        try:
+            transcript = transcribe_audio(mp3_path)
+        except Exception as e:
+            raise HTTPException(
+                status_code=500,
+                detail=f"Transcription service failed: {str(e)}"
+            )
 
-        # Return final structured response
+        try:
+            llm_result = classify_with_llm(
+                transcript,
+                features,
+                request.language
+            )
+        except Exception as e:
+            raise HTTPException(
+                status_code=500,
+                detail=f"Classification failed: {str(e)}"
+            )
+
         return {
             "status": "success",
             "language": request.language,
@@ -61,8 +85,8 @@ async def voice_detection(
         raise http_err
 
     except Exception as e:
-        # Catch unexpected errors and return clean message
+        import traceback
         raise HTTPException(
             status_code=500,
-            detail=str(e)
+            detail=f"Unexpected server error: {repr(e)}"
         )
